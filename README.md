@@ -19,11 +19,6 @@ A simple banking transactions web app:
 To start a local development server, run:
 
 ```bash
-npm i -g @angular/cli
-ng new bank-app --routing --style=scss
-cd bank-app
-npm i bootstrap@5
-# add "node_modules/bootstrap/dist/css/bootstrap.min.css" to angular.json styles
-# copy repo files into src/
+npm ci
 npm start
 
