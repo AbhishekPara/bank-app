@@ -1,0 +1,52 @@
+<div class="card shadow-sm">
+    <div class="card-body">
+      <div class="d-flex flex-wrap gap-2 align-items-end mb-3">
+        <div>
+          <label class="form-label">Account</label>
+          <select class="form-select" [(ngModel)]="selectedAccountId" (ngModelChange)="apply()" [ngModelOptions]="{standalone:true}">
+            <option *ngFor="let a of accounts" [ngValue]="a.id">#{{a.id}} • {{a.name}} ({{a.type}})</option>
+          </select>
+        </div>
+  
+        <div>
+          <label class="form-label">Search</label>
+          <input class="form-control" placeholder="amount, note, id…" [(ngModel)]="q" (input)="apply()" [ngModelOptions]="{standalone:true}" />
+        </div>
+      </div>
+  
+      <div class="table-responsive">
+        <table class="table table-sm align-middle">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Date</th>
+              <th>Direction</th>
+              <th>Counterparty</th>
+              <th class="text-end">Amount</th>
+              <th>Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let t of filtered">
+              <td>{{t.id}}</td>
+              <td>{{t.date | date:'medium'}}</td>
+              <td>
+                <span class="badge" [class.bg-danger]="direction(t)==='Sent'" [class.bg-success]="direction(t)==='Received'">
+                  {{direction(t)}}
+                </span>
+              </td>
+              <td>{{counterparty(t)}}</td>
+              <td class="text-end" [class.text-danger]="direction(t)==='Sent'" [class.text-success]="direction(t)==='Received'">
+                {{ direction(t)==='Sent' ? '-' : '+' }}${{t.amount | number:'1.2-2'}}
+              </td>
+              <td>{{t.note || '—'}}</td>
+            </tr>
+            <tr *ngIf="!filtered.length">
+              <td colspan="6" class="text-center text-muted py-4">No transactions.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
