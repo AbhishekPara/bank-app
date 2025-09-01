@@ -21,4 +21,6 @@ To start a local development server, run:
 ```bash
 npm ci
 npm start
+```
 
+visit http://localhost:4200/
