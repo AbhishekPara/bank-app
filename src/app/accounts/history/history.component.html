@@ -41,9 +41,11 @@
               </td>
               <td>{{t.note || '—'}}</td>
             </tr>
-            <tr *ngIf="!filtered.length">
-              <td colspan="6" class="text-center text-muted py-4">No transactions.</td>
-            </tr>
+            @if (!filtered.length) {
+              <tr>
+                <td colspan="6" class="text-center text-muted py-4">No transactions.</td>
+              </tr>
+            }
           </tbody>
         </table>
       </div>
